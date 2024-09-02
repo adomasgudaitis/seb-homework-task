@@ -1,3 +1,6 @@
+using SebHomeworkTask.Infrastructure;
+using SebHomeworkTask.Infrastructure.Services;
+
 namespace SebHomeworkTask;
 
 public class Program
@@ -7,7 +10,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
+        //Infrastructure
+        builder.Services.AddScoped<IPollutionSourceService, PollutionSourceService>();
+        builder.Services.AddHttpClient<IPollutionSourceService, PollutionSourceService>();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
