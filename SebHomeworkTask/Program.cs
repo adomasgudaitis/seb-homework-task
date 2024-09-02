@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using SebHomeworkTask.Infrastructure;
+using SebHomeworkTask.Infrastructure.Data;
 using SebHomeworkTask.Infrastructure.Services;
 
 namespace SebHomeworkTask;
@@ -13,10 +15,14 @@ public class Program
         //Infrastructure
         builder.Services.AddScoped<IPollutionSourceService, PollutionSourceService>();
         builder.Services.AddHttpClient<IPollutionSourceService, PollutionSourceService>();
+        builder.Services.AddScoped<IPollutionSourceRepository, PollutionSourceRepository>();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        
+        // Db context
+        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
 
         var app = builder.Build();
 
