@@ -13,7 +13,7 @@ public class PollutionSourceResponse
     public string Address { get; set; }
 
     public string FormNumber { get; set; }
-    
+
     public DateTime FormDate { get; set; }
 
     public string? ObjectConditon { get; set; }
@@ -21,6 +21,6 @@ public class PollutionSourceResponse
     public string? ObjectType { get; set; }
 
     public string? ThreatToEnvironment { get; set; }
-    
+
     public string? Coord { get; set; }
 }

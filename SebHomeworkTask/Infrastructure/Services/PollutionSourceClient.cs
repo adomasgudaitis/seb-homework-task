@@ -8,14 +8,14 @@ public class PollutionSourceClient : IPollutionSourceClient
     private readonly HttpClient _client;
     private readonly ILogger<PollutionSourceClient> _logger;
 
-    private readonly string _apiEndpoint;
+    private readonly string _apiEndpointUrl;
 
     public PollutionSourceClient(HttpClient client, ILogger<PollutionSourceClient> logger,
         IConfiguration configuration)
     {
         _client = client;
         _logger = logger;
-        _apiEndpoint = configuration["PollutionSourceApiUrl"] ??
+        _apiEndpointUrl = configuration["PollutionSourceApiUrl"] ??
                        throw new KeyNotFoundException("PollutionSourceApiUrl is missing in configuration");
     }
 
@@ -24,8 +24,8 @@ public class PollutionSourceClient : IPollutionSourceClient
         try
         {
             _logger.LogInformation("Fetching Sources of Pollution Data");
-        
-            var response = await _client.GetAsync(_apiEndpoint);
+
+            var response = await _client.GetAsync(_apiEndpointUrl);
             response.EnsureSuccessStatusCode();
 
             var data = await response.Content.ReadFromJsonAsync<PollutionSourceResponseDto>();

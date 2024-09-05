@@ -19,7 +19,8 @@ public class ApplicationController : ControllerBase
     // Added a mandatory query parameter 'name'
     // to simulate the BadRequest scenario for showing the use of a custom middleware
     [HttpGet(Name = "GettingPollutionSources")]
-    public async Task<ActionResult<IEnumerable<GroupedPollutionSourcesDto>>> GetPollutionSources([FromQuery] string name)
+    public async Task<ActionResult<IEnumerable<GroupedPollutionSourcesDto>>> GetPollutionSources(
+        [FromQuery] string name)
     {
         Console.WriteLine($"Getting pollution sources for {name}");
         var data = await _pollutionSourceProcessingService.RetrieveGroupedData();

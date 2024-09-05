@@ -14,7 +14,7 @@ public class PollutionSourceRepository : IPollutionSourceRepository
         _context = context;
         _logger = logger;
     }
-    
+
     public async Task<IEnumerable<PollutionSource>> GetAll()
     {
         _logger.LogInformation("Fetching pollution sources from the database.");
@@ -35,6 +35,5 @@ public class PollutionSourceRepository : IPollutionSourceRepository
             _logger.Log(LogLevel.Error, "Failed to save pollution sources to the database.");
             throw new DataStoringException("Failed to save pollution sources to the database.", e);
         }
-
     }
 }

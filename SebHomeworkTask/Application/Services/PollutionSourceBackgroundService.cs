@@ -25,17 +25,18 @@ public class PollutionSourceBackgroundService : IHostedService, IDisposable
         var now = DateTime.Now;
         var scheduledTimeString = _configuration["DataFetchScheduledTime"] ?? "01:00";
         var scheduledTime = DateTime.Parse(scheduledTimeString);
-        var nextRun = new DateTime(now.Year, now.Month, now.Day, scheduledTime.Hour, scheduledTime.Minute, scheduledTime.Second, 0, DateTimeKind.Local);
+        var nextRun = new DateTime(now.Year, now.Month, now.Day, scheduledTime.Hour, scheduledTime.Minute,
+            scheduledTime.Second, 0, DateTimeKind.Local);
 
         if (now > nextRun)
         {
             nextRun = nextRun.AddDays(1);
         }
-        
+
         var delay = nextRun - now;
 
         _timer = new Timer(FetchAndStoreData, null, delay, TimeSpan.FromHours(24));
-        
+
         return Task.CompletedTask;
     }
 
@@ -54,7 +55,6 @@ public class PollutionSourceBackgroundService : IHostedService, IDisposable
     {
         _timer?.Change(Timeout.Infinite, 0);
         return Task.CompletedTask;
-        
     }
 
     public void Dispose()

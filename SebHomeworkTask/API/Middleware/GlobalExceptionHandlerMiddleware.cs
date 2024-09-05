@@ -29,7 +29,7 @@ public class GlobalExceptionHandlerMiddleware
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
         var response = new
-        { 
+        {
             context.Response.StatusCode,
             Message = "An internal server error occurred. Please try again later.",
         };
