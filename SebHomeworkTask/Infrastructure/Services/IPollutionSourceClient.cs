@@ -2,7 +2,7 @@ using SebHomeworkTask.Core.DTOs;
 
 namespace SebHomeworkTask.Infrastructure.Services;
 
-public interface IPollutionSourceService
+public interface IPollutionSourceClient
 {
     Task<PollutionSourceResponseDto> FetchData();
 }

@@ -3,27 +3,29 @@ using SebHomeworkTask.Core.Exceptions;
 
 namespace SebHomeworkTask.Infrastructure.Services;
 
-public class PollutionSourceService : IPollutionSourceService
+public class PollutionSourceClient : IPollutionSourceClient
 {
     private readonly HttpClient _client;
-    private readonly ILogger<PollutionSourceService> _logger;
+    private readonly ILogger<PollutionSourceClient> _logger;
 
-    private const string ApiEndpoint =
-        "https://get.data.gov.lt/datasets/gov/lgt/potencialus_tarsos_zidiniai/TarsosZidinys/:format/json";
+    private readonly string _apiEndpoint;
 
-    public PollutionSourceService(HttpClient client, ILogger<PollutionSourceService> logger)
+    public PollutionSourceClient(HttpClient client, ILogger<PollutionSourceClient> logger,
+        IConfiguration configuration)
     {
         _client = client;
         _logger = logger;
+        _apiEndpoint = configuration["PollutionSourceApiUrl"] ??
+                       throw new KeyNotFoundException("PollutionSourceApiUrl is missing in configuration");
     }
-    
+
     public async Task<PollutionSourceResponseDto> FetchData()
     {
         try
         {
             _logger.LogInformation("Fetching Sources of Pollution Data");
         
-            var response = await _client.GetAsync(ApiEndpoint);
+            var response = await _client.GetAsync(_apiEndpoint);
             response.EnsureSuccessStatusCode();
 
             var data = await response.Content.ReadFromJsonAsync<PollutionSourceResponseDto>();

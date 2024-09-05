@@ -19,11 +19,11 @@ public class PollutionSource
     
     public DateTime FormDate { get; set; }
 
-    public string ObjectConditon { get; set; }
+    public string? ObjectConditon { get; set; }
 
-    public string ObjectType { get; set; }
+    public string? ObjectType { get; set; }
 
-    public string ThreatToEnvironment { get; set; }
+    public string? ThreatToEnvironment { get; set; }
     
-    public string Coord { get; set; }
+    public string? Coord { get; set; }
 }
