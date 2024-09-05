@@ -1,3 +1,4 @@
 @SebHomeworkTask_HostAddress = http://localhost:5265
 
+GET {{SebHomeworkTask_HostAddress}}/api/v1/source-of-pollution
 ###

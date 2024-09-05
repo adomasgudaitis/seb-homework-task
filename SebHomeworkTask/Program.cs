@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using SebHomeworkTask.Infrastructure;
+using SebHomeworkTask.API.Middleware;
+using SebHomeworkTask.Application.Services;
 using SebHomeworkTask.Infrastructure.Data;
 using SebHomeworkTask.Infrastructure.Services;
 
@@ -37,7 +38,8 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
+        app.UseBadRequestLoggingMiddleware();
+        app.UseGlobalExceptionHandlerMiddleware();
 
         app.MapControllers();
 
